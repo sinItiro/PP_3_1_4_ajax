@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New user</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
+
+  <input th:field="*{username}" type="text" id="username" placeholder="username"/>
+  <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red">username error</div>
+  <br />
+  <input th:field="*{surname}" type="text" id="surname" placeholder="surname"/>
+  <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" style="color:red">surname error</div>
+  <br />
+  <input th:field="*{age}" type="text" id="age" placeholder="age"/>
+  <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:red">age error</div>
+  <br />
+  <input th:field="*{email}" type="text" id="email" placeholder="email"/>
+  <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"> email error</div>
+  <br />
+  <input th:field="*{password}" type="password" id="password" placeholder="password"/>
+  <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"> password error</div>
+  <br />
+  <select name="listroles[]" multiple="multiple" size="4">
+    <option th:each="role : ${roles}" th:value="${role.getName()}" th:text="${role.getName()}"
+            th:selected="${role.getName()=='ROLE_USER'}"></option>
+  </select>
+  <br />
+  <input type="submit" value="Add user" />
+</form>
+</body>
+</html>

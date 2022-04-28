@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<h1 th:text="${user.getUsername()}">User</h1>
+<table border="1">
+    <tr>
+        <td>id</td>
+        <td th:text="${user.getId()}"></td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td th:text="${user.getUsername()}"></td>
+    </tr>
+    <tr>
+        <td>surname</td>
+        <td th:text="${user.getSurname()}"></td>
+    </tr>
+    <tr>
+        <td>age</td>
+        <td th:text="${user.getAge()}"></td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td th:text="${user.getEmail()}"></td>
+    </tr>
+    <tr>
+        <td>edit user</td>
+        <td><a th:href="@{/admin/{id}/edit(id=${user.getId()})}">edit user</a></td>
+    </tr>
+    <tr>
+        <td>delete user</td>
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete user" />
+            </form>
+        </td>
+    </tr>
+
+
+
+</table>
+<p><a href="/admin/">&lt;&lt; Admin panel</a></p>
+<th:block th:insert="blocks/blocks.html :: logout"></th:block>
+</body>
+</html>

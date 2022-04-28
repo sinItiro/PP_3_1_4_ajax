@@ -1,0 +1,46 @@
+create table users (
+id	 BIGINT NOT NULL AUTO_INCREMENT,
+email		varchar(100) UNIQUE,
+username	varchar(32) not null,
+surname		varchar(60),
+age		TINYINT UNSIGNED,
+password	varchar(100),
+enabled		boolean,
+primary key (id)
+);
+
+
+
+
+create table roles (
+id	int NOT NULL AUTO_INCREMENT,
+name	varchar(50) not null,
+primary key (id)
+);
+
+
+create table users_roles (
+user_id	bigint not null,
+role_id int not null,
+primary key (user_id, role_id),
+foreign key (user_id) references users (id),
+foreign key (role_id) references roles (id)
+);
+
+insert into roles (name) values ('ROLE_USER'), ('ROLE_ADMIN');
+
+insert into users (email, username, surname, age, password)
+values ('admin@admin.ru', 'admin', 'adminovich', 30, '{bcrypt}$2a$12$a7YKonZGFC87R0yLlKWS6uqcCQqLh6m2dpEYJnKNMgGG22uPFChKW');
+
+insert into users (email, username, surname, age, password)
+values ('user@user.ru', 'user', 'userovich', 20, '{bcrypt}$2a$12$q7e//vGXs.U7dvNz9KXGK.Xx98mCxvujEhX.vaGKP3k2riLUavRyi');
+
+insert into users_roles (user_id, role_id) values (1, 2);
+insert into users_roles (user_id, role_id) values (1, 1);
+insert into users_roles (user_id, role_id) values (2, 1);
+
+
+INSERT INTO `spring_hiber`.`users` (`age`, `enabled`, `name`, `password`, `surname`, `username`) VALUES (30, 1, 'Ivan', '', 'Ivanov', 'user')
+
+INSERT INTO `spring_hiber`.`users` (`age`, `enabled`, `name`, `password`, `surname`, `username`) VALUES (18, 1, 'Alexey', '{bcrypt}$2a$12$a7YKonZGFC87R0yLlKWS6uqcCQqLh6m2dpEYJnKNMgGG22uPFChKW', 'Popov', 'admin')
+
