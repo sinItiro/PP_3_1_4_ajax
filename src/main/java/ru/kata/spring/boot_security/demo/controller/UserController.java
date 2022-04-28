@@ -23,7 +23,7 @@ public class UserController {
     public String getUser(ModelMap model, Principal principal) {
         String userEmail = principal.getName();
         model.addAttribute("str", userEmail);
-        model.addAttribute("user", userService.findByEmail(userEmail)); //TODO user_by_id = 1
+        model.addAttribute("user", userService.findByEmail(userEmail));
         return "/user/user";
     }
 }
