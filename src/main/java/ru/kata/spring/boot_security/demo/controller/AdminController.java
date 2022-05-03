@@ -25,22 +25,18 @@ public class AdminController {
 
 
     @GetMapping()
-    public String usersList(ModelMap model) {
+    public String usersList(ModelMap model, Principal principal) {
         model.addAttribute("users", userService.findAll());
-        return "/admin/users";
+        model.addAttribute("authUser", userService.findByEmail(principal.getName()));
+        model.addAttribute(new User());
+        model.addAttribute("roles",roleService.findAll());
+        return "/admin/admin";
     }
 
     @GetMapping(value = "/{id}")
     public String getUser(ModelMap model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.findById(id));
         return "/admin/user";
-    }
-
-    @GetMapping(value = "/new")
-    public String getUser(ModelMap model) {
-        model.addAttribute(new User());
-        model.addAttribute("roles",roleService.findAll());
-        return "/admin/new";
     }
 
     @PostMapping

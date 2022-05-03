@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@Data
 @ToString
 @Entity
 @Table(name = "users")
