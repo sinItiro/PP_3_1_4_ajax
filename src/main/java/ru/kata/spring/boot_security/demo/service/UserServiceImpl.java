@@ -24,9 +24,12 @@ public class UserServiceImpl implements UserService{
         this.roleService = roleService;
     }
 
+    @Transactional
     public User findById(Long id) {
         return userRepository.getById(id);
     }
+
+    @Transactional
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -35,7 +38,7 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
     @Transactional
-    public void saveUserAndRoles(User user, String[] listroles) {
+    public User saveUserAndRoles(User user, String[] listroles) {
         Set<Role> setRole = new HashSet<>();
         for (String role : listroles) {
             setRole.add(roleService.findByName(role));
@@ -48,6 +51,7 @@ public class UserServiceImpl implements UserService{
         }
 
         userRepository.save(user);
+        return user;
     }
 
 

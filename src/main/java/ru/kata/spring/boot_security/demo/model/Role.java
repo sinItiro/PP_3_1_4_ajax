@@ -1,5 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -18,6 +20,7 @@ public class Role implements GrantedAuthority {
 
     private String name;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
